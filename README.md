@@ -2,8 +2,6 @@
 
 Interaktivní Three.js prezentace konceptuálního modelu gravitace pro plochou Zemi ve tvaru komolého kužele.
 
-> Poznámka: jde o fiktivní / pseudovědecký konceptuální model určený pro vizualizaci, nikoliv o fyzikálně platný model gravitace.
-
 ## Co model obsahuje
 
 - 3D komolý kužel s nastavitelnou horní a spodní základnou.
