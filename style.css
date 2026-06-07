@@ -1,0 +1,177 @@
+:root {
+  --bg: #070912;
+  --bg2: #111827;
+  --panel: rgba(17, 24, 39, 0.88);
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --line: rgba(255, 255, 255, 0.12);
+  --accent: #d6a84f;
+  --accent2: #65d6ad;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  background: radial-gradient(circle at top left, #172033 0, var(--bg) 42%, #03040a 100%);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--line);
+  background: rgba(3, 4, 10, 0.72);
+  backdrop-filter: blur(12px);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 0.25rem;
+  font-size: clamp(1.25rem, 2.4vw, 2rem);
+  letter-spacing: 0.02em;
+}
+
+h2 {
+  font-size: 1.25rem;
+  color: var(--accent);
+}
+
+h3 {
+  margin-top: 1.25rem;
+  margin-bottom: 0.45rem;
+  font-size: 1rem;
+  color: var(--accent2);
+}
+
+p,
+li {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.topbar p {
+  margin-bottom: 0;
+}
+
+.badge {
+  white-space: nowrap;
+  border: 1px solid rgba(214, 168, 79, 0.55);
+  color: var(--accent);
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+
+main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  min-height: calc(100vh - 148px);
+}
+
+#viewer {
+  position: relative;
+  min-height: 640px;
+  overflow: hidden;
+}
+
+#scene {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#loading {
+  position: absolute;
+  inset: auto auto 1rem 1rem;
+  z-index: 2;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--line);
+  background: rgba(3, 4, 10, 0.78);
+  border-radius: 0.65rem;
+  color: var(--muted);
+}
+
+.panel {
+  padding: 1.25rem;
+  border-left: 1px solid var(--line);
+  background: var(--panel);
+  overflow-y: auto;
+}
+
+pre {
+  padding: 0.8rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--line);
+  border-radius: 0.65rem;
+  overflow-x: auto;
+}
+
+code {
+  color: #f7d98b;
+}
+
+footer {
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(3, 4, 10, 0.86);
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.lil-gui.root {
+  --background-color: rgba(17, 24, 39, 0.92);
+  --title-background-color: rgba(3, 4, 10, 0.95);
+  --text-color: #e5e7eb;
+  --widget-color: #374151;
+  --hover-color: #4b5563;
+  --focus-color: #d6a84f;
+  --number-color: #f7d98b;
+  --string-color: #65d6ad;
+}
+
+@media (max-width: 920px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  main {
+    grid-template-columns: 1fr;
+  }
+
+  #viewer {
+    min-height: 70vh;
+  }
+
+  .panel {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .badge {
+    white-space: normal;
+  }
+}
