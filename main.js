@@ -284,7 +284,7 @@ function createFlatEarthSurfaceMap(radius, y) {
   const iceWallGeometry = new THREE.CylinderGeometry(
     radius * 1.015,
     radius * 1.015,
-    3000,
+    1200,
     256,
     1,
     true
