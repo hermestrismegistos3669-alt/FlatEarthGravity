@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trismegistic Conical Gravity Field</title>
+  <meta name="description" content="Interaktivní 3D pseudovědecký model kónické gravitace na ploché Zemi ve tvaru komolého kužele." />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Trismegistic Conical Gravity Field</h1>
+      <p>Interaktivní 3D koncept kónické gravitace pro model ploché Země ve tvaru komolého kužele.</p>
+    </div>
+    <button id="screenshotBtn" title="Uloží snímek scény">Export screenshot</button>
+  </header>
+
+  <main class="layout">
+    <section id="viewer" aria-label="3D viewer">
+      <div id="loading">Načítám 3D model…</div>
+    </section>
+
+    <aside class="panel">
+      <h2>Model</h2>
+      <p>
+        Země je zde zobrazena jako masivní komolý kužel s horním obyvatelným diskem,
+        hlubinnými hustotními vrstvami, centrální dutinou a gravitačními vektory kolmými k povrchu.
+      </p>
+
+      <h3>Základní hypotéza</h3>
+      <p>
+        Gravitační pole nevzniká jako tah ke středu koule, ale jako výsledek hustotně vrstveného
+        kónického masivu. Vodorovné složky se údajně ruší a svislé složky se sčítají.
+      </p>
+
+      <h3>Parametry</h3>
+      <table>
+        <tr><td>Horní radius</td><td>20 000 km</td></tr>
+        <tr><td>Spodní radius</td><td>38 000 km</td></tr>
+        <tr><td>Výška těla</td><td>4 800 km</td></tr>
+        <tr><td>Zakřivení povrchu</td><td>cca 111 000 km</td></tr>
+      </table>
+
+      <p class="note">
+        Poznámka: jde o fikční/pseudovědecký prezentační model, ne o fyzikálně platný model Země.
+      </p>
+    </aside>
+  </main>
+
+  <footer>
+    <span>designed by Hermes Trismegistos</span>
+  </footer>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
