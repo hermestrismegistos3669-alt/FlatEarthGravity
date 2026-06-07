@@ -223,6 +223,119 @@ function makeCutPlane() {
   return mesh;
 }
 
+function createFlatEarthSurfaceMap(radius, y) {
+  const group = new THREE.Group();
+  group.name = "Azimuthal Flat Earth Surface";
+
+  // horní obyvatelný disk
+  const diskGeometry = new THREE.CircleGeometry(radius, 256);
+  const diskMaterial = new THREE.MeshStandardMaterial({
+    color: 0x2d6f8f,
+    roughness: 0.8,
+    metalness: 0.05,
+    transparent: true,
+    opacity: 0.92,
+    side: THREE.DoubleSide
+  });
+
+  const disk = new THREE.Mesh(diskGeometry, diskMaterial);
+  disk.rotation.x = -Math.PI / 2;
+  disk.position.y = y + 8;
+  group.add(disk);
+
+  // azimutální poledníky
+  const meridianMaterial = new THREE.LineBasicMaterial({
+    color: 0xd8e8ff,
+    transparent: true,
+    opacity: 0.35
+  });
+
+  for (let i = 0; i < 24; i++) {
+    const a = (i / 24) * Math.PI * 2;
+    const points = [
+      new THREE.Vector3(0, y + 14, 0),
+      new THREE.Vector3(Math.cos(a) * radius * 0.96, y + 14, Math.sin(a) * radius * 0.96)
+    ];
+
+    const line = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(points),
+      meridianMaterial
+    );
+
+    group.add(line);
+  }
+
+  // soustředné kružnice azimutální projekce
+  for (let i = 1; i <= 6; i++) {
+    const r = radius * (i / 7);
+    const curve = new THREE.EllipseCurve(0, 0, r, r, 0, Math.PI * 2, false, 0);
+    const points2d = curve.getPoints(256);
+    const points3d = points2d.map(p => new THREE.Vector3(p.x, y + 16, p.y));
+
+    const ring = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(points3d),
+      meridianMaterial
+    );
+
+    group.add(ring);
+  }
+
+  // ledová zeď / Antarktida po obvodu
+  const iceWallGeometry = new THREE.CylinderGeometry(
+    radius * 1.015,
+    radius * 1.015,
+    420,
+    256,
+    1,
+    true
+  );
+
+  const iceWallMaterial = new THREE.MeshStandardMaterial({
+    color: 0xe8f8ff,
+    roughness: 0.55,
+    metalness: 0.02,
+    transparent: true,
+    opacity: 0.9,
+    side: THREE.DoubleSide
+  });
+
+  const iceWall = new THREE.Mesh(iceWallGeometry, iceWallMaterial);
+  iceWall.position.y = y + 210;
+  group.add(iceWall);
+
+  // horní hrana ledové zdi
+  const iceCapGeometry = new THREE.TorusGeometry(radius * 1.015, 55, 12, 256);
+  const iceCapMaterial = new THREE.MeshStandardMaterial({
+    color: 0xffffff,
+    roughness: 0.6
+  });
+
+  const iceCap = new THREE.Mesh(iceCapGeometry, iceCapMaterial);
+  iceCap.rotation.x = Math.PI / 2;
+  iceCap.position.y = y + 420;
+  group.add(iceCap);
+
+  // severní pól ve středu
+  const poleGeometry = new THREE.CylinderGeometry(45, 45, 700, 32);
+  const poleMaterial = new THREE.MeshStandardMaterial({
+    color: 0xff3333,
+    roughness: 0.4
+  });
+
+  const pole = new THREE.Mesh(poleGeometry, poleMaterial);
+  pole.position.y = y + 350;
+  group.add(pole);
+
+  const poleSphere = new THREE.Mesh(
+    new THREE.SphereGeometry(130, 32, 16),
+    poleMaterial
+  );
+  poleSphere.position.y = y + 730;
+  group.add(poleSphere);
+
+  return group;
+}
+
 function rebuildModel() {
   root.clear();
 
@@ -243,6 +356,13 @@ function rebuildModel() {
   diskMesh = makeHabitableDisk();
   diskMesh.visible = params.showHabitableDisk;
   root.add(diskMesh);
+
+  const flatEarthMap = createFlatEarthSurfaceMap(
+  params.topRadius,
+  surfaceBulge(0) + 20
+);
+
+root.add(flatEarthMap);
 
   layerGroup = makeDensityLayers();
   layerGroup.visible = params.showDensityLayers;
