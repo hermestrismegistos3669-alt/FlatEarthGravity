@@ -333,6 +333,100 @@ function createFlatEarthSurfaceMap(radius, y) {
   poleSphere.position.y = y + 730;
   group.add(poleSphere);
 
+// stylizované kontinenty
+const continentMaterial = new THREE.MeshStandardMaterial({
+  color: 0x2f8f45,
+  roughness: 0.75,
+  metalness: 0.02,
+  transparent: true,
+  opacity: 0.88,
+  side: THREE.DoubleSide
+});
+
+function addContinent(name, points, lift = 28) {
+  const shape = new THREE.Shape();
+
+  shape.moveTo(points[0][0] * radius, points[0][1] * radius);
+
+  for (let i = 1; i < points.length; i++) {
+    shape.lineTo(points[i][0] * radius, points[i][1] * radius);
+  }
+
+  shape.closePath();
+
+  const geometry = new THREE.ShapeGeometry(shape, 12);
+  const mesh = new THREE.Mesh(geometry, continentMaterial);
+
+  mesh.rotation.x = -Math.PI / 2;
+  mesh.position.y = y + lift;
+  mesh.name = name;
+
+  group.add(mesh);
+}
+
+// Severní Amerika
+addContinent("North America", [
+  [-0.55,  0.38],
+  [-0.40,  0.52],
+  [-0.22,  0.46],
+  [-0.18,  0.30],
+  [-0.30,  0.18],
+  [-0.48,  0.18],
+  [-0.64,  0.28]
+]);
+
+// Jižní Amerika
+addContinent("South America", [
+  [-0.25,  0.08],
+  [-0.12, -0.02],
+  [-0.08, -0.22],
+  [-0.16, -0.44],
+  [-0.26, -0.58],
+  [-0.34, -0.38],
+  [-0.33, -0.14]
+]);
+
+// Evropa + Asie
+addContinent("Eurasia", [
+  [-0.04,  0.32],
+  [ 0.16,  0.44],
+  [ 0.46,  0.40],
+  [ 0.66,  0.28],
+  [ 0.58,  0.12],
+  [ 0.36,  0.08],
+  [ 0.16,  0.18],
+  [ 0.00,  0.16],
+  [-0.12,  0.24]
+]);
+
+// Afrika
+addContinent("Africa", [
+  [ 0.02,  0.12],
+  [ 0.18,  0.06],
+  [ 0.24, -0.16],
+  [ 0.14, -0.38],
+  [ 0.02, -0.30],
+  [-0.06, -0.08]
+]);
+
+// Austrálie
+addContinent("Australia", [
+  [ 0.42, -0.36],
+  [ 0.58, -0.34],
+  [ 0.66, -0.44],
+  [ 0.54, -0.52],
+  [ 0.38, -0.48]
+]);
+
+// Grónsko
+addContinent("Greenland", [
+  [-0.30,  0.60],
+  [-0.18,  0.66],
+  [-0.10,  0.58],
+  [-0.18,  0.50],
+  [-0.30,  0.52]
+]);
+  
   return group;
 }
 
