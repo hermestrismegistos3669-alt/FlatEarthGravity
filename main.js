@@ -284,7 +284,7 @@ function createFlatEarthSurfaceMap(radius, y) {
   const iceWallGeometry = new THREE.CylinderGeometry(
     radius * 1.015,
     radius * 1.015,
-    420,
+    3000,
     256,
     1,
     true
@@ -300,11 +300,11 @@ function createFlatEarthSurfaceMap(radius, y) {
   });
 
   const iceWall = new THREE.Mesh(iceWallGeometry, iceWallMaterial);
-  iceWall.position.y = y + 210;
+  iceWall.position.y = y + 1500;
   group.add(iceWall);
 
   // horní hrana ledové zdi
-  const iceCapGeometry = new THREE.TorusGeometry(radius * 1.015, 55, 12, 256);
+  const iceCapGeometry = new THREE.TorusGeometry(radius * 1.015, 300, 16, 256);
   const iceCapMaterial = new THREE.MeshStandardMaterial({
     color: 0xffffff,
     roughness: 0.6
@@ -312,7 +312,7 @@ function createFlatEarthSurfaceMap(radius, y) {
 
   const iceCap = new THREE.Mesh(iceCapGeometry, iceCapMaterial);
   iceCap.rotation.x = Math.PI / 2;
-  iceCap.position.y = y + 420;
+  iceCap.position.y = y + 3000;
   group.add(iceCap);
 
   // severní pól ve středu
