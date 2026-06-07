@@ -312,7 +312,7 @@ function createFlatEarthSurfaceMap(radius, y) {
 
   const iceCap = new THREE.Mesh(iceCapGeometry, iceCapMaterial);
   iceCap.rotation.x = Math.PI / 2;
-  iceCap.position.y = y + 3000;
+  iceCap.position.y = y + iceWallHeight;
   group.add(iceCap);
 
   // severní pól ve středu
