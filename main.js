@@ -300,7 +300,7 @@ function createFlatEarthSurfaceMap(radius, y) {
   });
 
   const iceWall = new THREE.Mesh(iceWallGeometry, iceWallMaterial);
- iceWall.position.y = y + iceWallHeight / 2;
+ iceWall.position.y = 1200;
   group.add(iceWall);
 
   // horní hrana ledové zdi
